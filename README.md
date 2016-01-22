@@ -1,7 +1,7 @@
 FlashyBundle
 ============
 
-Flash notifications for symfony2.
+![screenshot](Lexty/FlashyBundle/blob/screenshots/screenshot.png?raw=true "Flash notifications for symfony2")
 
 Installation
 ============
