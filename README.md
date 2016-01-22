@@ -51,29 +51,27 @@ class AppKernel extends Kernel
 Step 3: Include CSS and JS
 -------------------------
 
-Install assets files (js, css) with command:
-
-```bash
-$ php app/console assets:install --symlink
-```
-
-Then call the function `lexty_flashy_render()` in template:
+Call the function `lexty_flashy_render()` in template:
 
 ```html
 <!-- app/Resources/views/base.html.twig -->
 
-...
-
 <body>
-{{ lexty_flashy_render()|raw }}
-</body>
 
 ...
+
+{{ lexty_flashy_render()|raw }}
+
+...
+
+</body>
 
 ```
 
 Usage
 =====
+
+### Server side
 
 ```php
 // src/AppBundle/Controller/DefaultController.php
@@ -88,6 +86,24 @@ public function indexAction()
         // ...
     }
 ```
+
+### Client side
+
+
+```javascript
+flashy.add('Success message!', 'success');
+```
+
+### Available styles
+
+ - `Flashy::TYPE_INFO`         (`info`)
+ - `Flashy::TYPE_SUCCESS`      (`success`)
+ - `Flashy::TYPE_WARNING`      (`warning`)
+ - `Flashy::TYPE_ERROR`        (`error`)
+ - `Flashy::TYPE_MUTED`        (`muted`)
+ - `Flashy::TYPE_MUTED_DARK`   (`muted-dark`)
+ - `Flashy::TYPE_PRIMARY`      (`primary`)
+ - `Flashy::TYPE_PRIMARY_DARK` (`primary-dark`)
 
 License
 =======
