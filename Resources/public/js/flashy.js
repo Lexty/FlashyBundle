@@ -39,11 +39,11 @@ var flashy = (function() {
         };
 
         /**
-         * @param {string} type
          * @param {string} message
+         * @param {string} type
          * @param {number} [delay]
          */
-        flashy.add = function(type, message, delay) {
+        flashy.add = function(message, type, delay) {
             delay || (delay = defaultDelay);
 
             var newFlashy = createFlashy(type, message);
@@ -64,7 +64,7 @@ var flashy = (function() {
         flashy.render = function(data) {
             var len = data.length;
             for (var i = 0; i < len; i++) {
-                flashy.add(data[i].type, data[i].message, data[i].delay);
+                flashy.add(data[i].message, data[i].type, data[i].delay);
             }
         };
 
