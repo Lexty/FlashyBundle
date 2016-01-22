@@ -1,0 +1,103 @@
+$bg-color-success: #99c93d;
+//$text-color-success: #fff;
+
+$bg-color-warning: #fcf8e3;
+$border-color-warning: #faebcc;
+$text-color-warning: #8a6d3b;
+
+$bg-color-muted: #eee;
+$border-color-muted: #e2e2e2;
+$text-color-muted: #3a3a3a;
+
+$bg-color-muted-dark: #133259;
+$text-color-muted-dark: #e2e1e7;
+
+$bg-color-primary: #573e81;
+
+$bg-color-primary-dark: linear-gradient(to right, #133259 30%, #0d233e);
+
+$bg-color-info: #00baf3;
+
+$bg-color-error: #d14130;
+//$text-color-error: #fff;
+
+$container-width: 300px;
+
+.lexty-flashy-container {
+  position: fixed;
+  right: 20px;
+  top: 20px;
+  width: $container-width;
+
+  .lexty-flashy {
+    font-family: Arial, sans-serif;
+    padding: 11px 30px;
+    border-radius: 4px;
+    font-weight: 400;
+    font-size: 16px;
+    color: #fff;
+    margin-top: 20px;
+
+    &.lexty-flashy-type-success {
+      background-color: $bg-color-success;
+      //color: $text-color-success;
+    }
+    &.lexty-flashy-type-warning {
+      color: $text-color-warning;
+      background-color: $bg-color-warning;
+      border-color: $border-color-warning;
+    }
+    &.lexty-flashy-type-muted {
+      background: $bg-color-muted;
+      color: $text-color-muted;
+      border: 1px solid $border-color-muted;
+    }
+    &.lexty-flashy-type-muted-dark {
+      background: $bg-color-muted-dark;
+      color: $text-color-muted-dark;
+    }
+    &.lexty-flashy-type-primary {
+      background: $bg-color-primary;
+    }
+    &.lexty-flashy-type-primary-dark {
+      background: $bg-color-primary-dark;
+    }
+    &.lexty-flashy-type-info {
+      background: $bg-color-info;
+    }
+    &.lexty-flashy-type-error {
+      background: $bg-color-error;
+      //color: $text-color-error;
+    }
+
+    .lexty-flashy-message {
+      i {
+        margin-right: 8px;
+        position: relative;
+        top: 6px;
+      }
+
+      & > ul {
+        padding-left: 15px;
+      }
+
+      & > p:only-of-type {
+        margin-bottom: 0;
+      }
+
+      a {
+        color: inherit;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width:1050px) {
+  .lexty-flashy-container {
+    text-align: center;
+    right: 0;
+    left: 50%;
+    width: $container-width;
+    margin-left: -150px;
+  }
+}

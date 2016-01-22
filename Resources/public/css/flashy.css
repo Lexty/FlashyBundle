@@ -1,0 +1,70 @@
+.lexty-flashy-container {
+  position: fixed;
+  right: 20px;
+  top: 20px;
+  width: 300px; }
+  .lexty-flashy-container .lexty-flashy {
+    font-family: Arial, sans-serif;
+    padding: 11px 30px;
+    border-radius: 4px;
+    font-weight: 400;
+    font-size: 16px;
+    color: #fff;
+    margin-top: 20px; }
+    .lexty-flashy-container .lexty-flashy.lexty-flashy-type-success {
+      background-color: #99c93d; }
+    .lexty-flashy-container .lexty-flashy.lexty-flashy-type-warning {
+      color: #8a6d3b;
+      background-color: #fcf8e3;
+      border-color: #faebcc; }
+    .lexty-flashy-container .lexty-flashy.lexty-flashy-type-muted {
+      background: #eeeeee;
+      color: #3a3a3a;
+      border: 1px solid #e2e2e2; }
+    .lexty-flashy-container .lexty-flashy.lexty-flashy-type-muted-dark {
+      background: #133259;
+      color: #e2e1e7; }
+    .lexty-flashy-container .lexty-flashy.lexty-flashy-type-primary {
+      background: #573e81; }
+    .lexty-flashy-container .lexty-flashy.lexty-flashy-type-primary-dark {
+      background: linear-gradient(to right, #133259 30%, #0d233e); }
+    .lexty-flashy-container .lexty-flashy.lexty-flashy-type-info {
+      background: #00baf3; }
+    .lexty-flashy-container .lexty-flashy.lexty-flashy-type-error {
+      background: #d14130; }
+    .lexty-flashy-container .lexty-flashy .lexty-flashy-message i {
+      margin-right: 8px;
+      position: relative;
+      top: 6px; }
+    .lexty-flashy-container .lexty-flashy .lexty-flashy-message > ul {
+      padding-left: 15px; }
+    .lexty-flashy-container .lexty-flashy .lexty-flashy-message > p:only-of-type {
+      margin-bottom: 0; }
+    .lexty-flashy-container .lexty-flashy .lexty-flashy-message a {
+      color: inherit; }
+
+.flashy--error {
+  background: #d14130;
+  color: #fff; }
+
+.flashy-section > .flashy > ul {
+  padding-left: 15px; }
+
+.flashy-section > .flashy > p:only-of-type {
+  margin-bottom: 0; }
+
+.flashy-section .flashy i {
+  margin-right: 8px;
+  position: relative;
+  top: 6px; }
+
+.flashy-section .flashy .flashy__body {
+  color: inherit; }
+
+@media only screen and (max-width: 1050px) {
+  .lexty-flashy-container {
+    text-align: center;
+    right: 0;
+    left: 50%;
+    width: 300px;
+    margin-left: -150px; } }

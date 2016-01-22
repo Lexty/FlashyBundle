@@ -1,0 +1,16 @@
+parameters:
+    lexty_flashy.flashy.storageKey: lexty_flashy
+    lexty_flashy.flashy.defaultType: info
+    lexty_flashy.flashy.defaultDelay: 2800
+
+services:
+    lexty_flashy.twig_extension:
+        class: Lexty\FlashyBundle\Twig\FlashyExtension
+        public: false
+        arguments: ['@service_container']
+        tags:
+            - { name: twig.extension }
+
+    lexty_flashy.flashy:
+        class: Lexty\FlashyBundle\Flashy
+        arguments: [@session, '%lexty_flashy.flashy.storageKey%', '%lexty_flashy.flashy.defaultType%', '%lexty_flashy.flashy.defaultDelay%']
