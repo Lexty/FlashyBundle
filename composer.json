@@ -17,7 +17,7 @@
             "Lexty\\FlashyBundle" : ""
         }
     },
-    "minimum-stability": "dev-master"
+    "minimum-stability": "dev-master",
     "extra" : {
     "branch-alias" : {
             "dev-master" : "some_version-dev"
