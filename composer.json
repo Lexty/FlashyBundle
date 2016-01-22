@@ -14,13 +14,8 @@
     },
     "autoload" : {
         "psr-4" : {
-            "Lexty\\FlashyBundle" : ""
+            "Lexty\\FlashyBundle\\" : ""
         }
     },
-    "minimum-stability": "dev-master",
-    "extra" : {
-    "branch-alias" : {
-            "dev-master" : "some_version-dev"
-        }
-    }
+    "minimum-stability": "dev"
 }
