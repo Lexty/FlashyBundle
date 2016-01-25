@@ -1,20 +1,11 @@
 <?php
-use Lexty\FlashyBundle\Util\Flashy;
+use Lexty\FlashyBundle\Flashy\Flashy;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\HttpFoundation\Session\Session;
-use Symfony\Component\HttpFoundation\Session\Storage\MockArraySessionStorage;
-
-/**
- * @author Alexandr Medvedev <medvedevav@niissu.ru>
- */
 
 class FlashyTest extends KernelTestCase
 {
     private static $container;
-    /**
-     * @var Flashy
-     */
-    private static $flashy;
 
     private static $storageKey = '_storage_key';
     private static $type = Flashy::TYPE_INFO;
@@ -22,18 +13,16 @@ class FlashyTest extends KernelTestCase
 
     public static function setUpBeforeClass()
     {
-        //start the symfony kernel
         $kernel = static::createKernel();
         $kernel->boot();
 
-        //get the DI container
         self::$container = $kernel->getContainer();
     }
 
     /**
-     * @dataProvider addTypeMessageProvider
+     * @dataProvider addMessageProvider
      */
-    public function testAddTypeMessage($typeValue, $typeMethod, $message, $delay = null)
+    public function testAddTypeMessage($message, $typeValue = null, $typeMethod = null, $delay = null)
     {
         /** @var Session $session */
         $session = self::$container->get('session');
@@ -45,45 +34,84 @@ class FlashyTest extends KernelTestCase
         );
     }
 
-    public function addTypeMessageProvider()
+    /**
+     * @dataProvider addMessageWithEmptyTypesProvider
+     */
+    public function addMessageProvider()
     {
         return [
-            ['info', 'info', 'info message'],
-            ['info', 'info', 'info message', 4000],
-            ['success', 'success', 'success message'],
-            ['success', 'success', 'success message', 4000],
-            ['warning', 'warning', 'warning message'],
-            ['warning', 'warning', 'warning message', 4000],
-            ['error', 'error', 'error message'],
-            ['error', 'error', 'error message', 4000],
-            ['muted', 'muted', 'muted message'],
-            ['muted', 'muted', 'muted message', 4000],
-            ['muted-dark', 'mutedDark', 'mutedDark message'],
-            ['muted-dark', 'mutedDark', 'mutedDark message', 4000],
-            ['primary', 'primary', 'primary message'],
-            ['primary', 'primary', 'primary message', 4000],
-            ['primary-dark', 'primaryDark', 'primaryDark message'],
-            ['primary-dark', 'primaryDark', 'primaryDark message', 4000],
+            ['info message', 'info', 'info', ],
+            ['info message', 'info', 'info', 4000],
+            ['success message', 'success', 'success', ],
+            ['success message', 'success', 'success', 4000],
+            ['warning message', 'warning', 'warning', ],
+            ['warning message', 'warning', 'warning', 4000],
+            ['error message', 'error', 'error', ],
+            ['error message', 'error', 'error', 4000],
+            ['muted message', 'muted', 'muted', ],
+            ['muted message', 'muted', 'muted', 4000],
+            ['mutedDark message', 'muted-dark', 'mutedDark', ],
+            ['mutedDark message', 'muted-dark', 'mutedDark', 4000],
+            ['primary message', 'primary', 'primary', ],
+            ['primary message', 'primary', 'primary', 4000],
+            ['primaryDark message', 'primary-dark', 'primaryDark', ],
+            ['primaryDark message', 'primary-dark', 'primaryDark', 4000],
         ];
     }
 
-    public function _testAddMessage()
+    /**
+     * @dataProvider addMessageWithDefaultAndCustomTypesProvider
+     */
+    public function testAddArgsMessage($message, $typeValue = null, $typeMethod = null, $delay = null)
     {
         /** @var Session $session */
         $session = self::$container->get('session');
-        $flashy = new Flashy($session, '_lexty_flashy', Flashy::TYPE_INFO, 2800);
-        $flashy->addSuccess('Test success message!');
-        $flashy->addSuccess('Test success message with custom delay!', 500);
+        $flashy = new Flashy($session, self::$storageKey, self::$type, self::$delay);
+        $flashy->add($message, $typeValue, $delay);
+        $this->assertEquals(
+            [self::$storageKey => [[
+                'message' => ($typeMethod ?: self::$type) . ' message',
+                'type'    => $typeValue ?: self::$type,
+                'delay'   => $delay ?: self::$delay
+            ]]],
+            $session->getFlashBag()->all()
+        );
+    }
 
-        $flashy->add('Test message!');
-        $flashy->add('Test error message!', Flashy::TYPE_ERROR);
-        $flashy->add('Test error message with custom delay!', Flashy::TYPE_ERROR, 7000);
+    /**
+     * @dataProvider addMessageWithDefaultAndCustomTypesProvider
+     */
+    public function testAddArrayMessage($message, $typeValue = null, $typeMethod = null, $delay = null)
+    {
+        /** @var Session $session */
+        $session = self::$container->get('session');
+        $flashy = new Flashy($session, self::$storageKey, self::$type, self::$delay);
+        $params = ['message' => $message];
+        if ($typeValue) {
+            $params['type'] = $typeValue;
+        }
+        if ($delay) {
+            $params['delay'] = $delay;
+        }
+        $flashy->add($params);
+        $this->assertEquals(
+            [self::$storageKey => [[
+                'message' => ($typeMethod ?: self::$type) . ' message',
+                'type'    => $typeValue ?: self::$type,
+                'delay'   => $delay ?: self::$delay
+            ]]],
+            $session->getFlashBag()->all()
+        );
+    }
 
-        $flashy->add(['message' => 'Test message from array']);
-        $flashy->add(['message' => 'Test muted message from array', 'type' => Flashy::TYPE_MUTED]);
-        $flashy->add(['message' => 'Test muted message with custom delay from array', 'type' => Flashy::TYPE_MUTED, 'delay' => 9000]);
-
-        var_dump($session->getFlashBag()->all());
+    public function addMessageWithDefaultAndCustomTypesProvider()
+    {
+        return array_merge($this->addMessageProvider(),  [
+            [self::$type . ' message', null, null, 4000],
+            [self::$type . ' message'],
+            ['custom type message', 'customtype', 'custom type', 4000],
+            ['custom type message', 'customtype', 'custom type'],
+        ]);
     }
 
 }
