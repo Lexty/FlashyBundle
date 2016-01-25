@@ -24,7 +24,7 @@ class FlashyExtension extends \Twig_Extension
     {
         $css = $this->container->get('templating.helper.assets')->getUrl('bundles/lextyflashy/css/flashy.css');
         $js = $this->container->get('templating.helper.assets')->getUrl('bundles/lextyflashy/js/flashy.js');
-        $data = json_encode($this->container->get('lexty_flashy.flashy')->all());
+        $data = json_encode($this->container->get('lexty_flashy')->all());
 
         $html = <<< HTML
         <link href="$css" rel="stylesheet">

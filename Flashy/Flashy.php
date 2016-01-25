@@ -1,6 +1,6 @@
 <?php
 
-namespace Lexty\FlashyBundle;
+namespace Lexty\FlashyBundle\Flashy;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
 
@@ -97,6 +97,94 @@ class Flashy
         $flash = $this->prepare($flash, $type, $delay);
 
         $this->flashBag->add($this->storageKey, $flash);
+    }
+
+    /**
+     * Adds a info flash message.
+     *
+     * @param array|string $message
+     * @param int|null     $delay
+     */
+    public function addInfo($message, $delay = null)
+    {
+        $this->add((string)$message, self::TYPE_INFO, $delay);
+    }
+
+    /**
+     * Adds a success flash message.
+     *
+     * @param array|string $message
+     * @param int|null     $delay
+     */
+    public function addSuccess($message, $delay = null)
+    {
+        $this->add((string)$message, self::TYPE_SUCCESS, $delay);
+    }
+
+    /**
+     * Adds a warning flash message.
+     *
+     * @param array|string $message
+     * @param int|null     $delay
+     */
+    public function addWarning($message, $delay = null)
+    {
+        $this->add((string)$message, self::TYPE_WARNING, $delay);
+    }
+
+    /**
+     * Adds a error flash message.
+     *
+     * @param array|string $message
+     * @param int|null     $delay
+     */
+    public function addError($message, $delay = null)
+    {
+        $this->add((string)$message, self::TYPE_ERROR, $delay);
+    }
+
+    /**
+     * Adds a muted flash message.
+     *
+     * @param array|string $message
+     * @param int|null     $delay
+     */
+    public function addMuted($message, $delay = null)
+    {
+        $this->add((string)$message, self::TYPE_MUTED, $delay);
+    }
+
+    /**
+     * Adds a muted dark flash message.
+     *
+     * @param array|string $message
+     * @param int|null     $delay
+     */
+    public function addMutedDark($message, $delay = null)
+    {
+        $this->add((string)$message, self::TYPE_MUTED_DARK, $delay);
+    }
+
+    /**
+     * Adds a primary flash message.
+     *
+     * @param array|string $message
+     * @param int|null     $delay
+     */
+    public function addPrimary($message, $delay = null)
+    {
+        $this->add((string)$message, self::TYPE_PRIMARY, $delay);
+    }
+
+    /**
+     * Adds a primary dark flash message.
+     *
+     * @param array|string $message
+     * @param int|null     $delay
+     */
+    public function addPrimaryDark($message, $delay = null)
+    {
+        $this->add((string)$message, self::TYPE_PRIMARY_DARK, $delay);
     }
 
     /**

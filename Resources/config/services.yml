@@ -11,6 +11,6 @@ services:
         tags:
             - { name: twig.extension }
 
-    lexty_flashy.flashy:
-        class: Lexty\FlashyBundle\Flashy
-        arguments: [@session, '%lexty_flashy.storageKey%', '%lexty_flashy.type%', '%lexty_flashy.delay%']
+    lexty_flashy:
+        class: Lexty\FlashyBundle\Flashy\Flashy
+        arguments: ['@session', '%lexty_flashy.storageKey%', '%lexty_flashy.type%', '%lexty_flashy.delay%']
