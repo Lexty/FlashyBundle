@@ -79,7 +79,7 @@ Usage
 public function indexAction()
     {
 
-        $flashy = $this->container->get('lexty_flashy.flashy');
+        $flashy = $this->container->get('lexty_flashy');
 
         $flashy->add('Test message!', Flashy::TYPE_SUCCESS);
 
