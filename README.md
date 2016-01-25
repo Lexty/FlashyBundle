@@ -104,6 +104,15 @@ flashy.add('Success message!', 'success');
  - `Flashy::TYPE_MUTED_DARK`   (`muted-dark`)
  - `Flashy::TYPE_PRIMARY`      (`primary`)
  - `Flashy::TYPE_PRIMARY_DARK` (`primary-dark`)
+ 
+### Configuration
+ 
+```yaml
+# config/config.yml
+
+lexty_flashy:
+	delay: 2800 # while displaying flash messages (in milliseconds)
+```
 
 License
 =======

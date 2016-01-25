@@ -24,5 +24,8 @@ class LextyFlashyExtension extends Extension
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
+
+        $lextyFlashyDefintion = $container->getDefinition('lexty_flashy.flashy');
+        $lextyFlashyDefintion->addMethodCall('setConfig', [(array)$config]);
     }
 }

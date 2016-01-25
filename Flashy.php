@@ -71,6 +71,21 @@ class Flashy
     }
 
     /**
+     * @param $config
+     */
+    public function setConfig($config) {
+        if (isset($config['storageKey'])) {
+            $this->storageKey = $config['storageKey'];
+        }
+        if (isset($config['type'])) {
+            $this->defaultType = $config['type'];
+        }
+        if (isset($config['delay'])) {
+            $this->defaultDelay = $config['delay'];
+        }
+    }
+
+    /**
      * Adds a flash message.
      *
      * @param array|string $flash
